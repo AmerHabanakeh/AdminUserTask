@@ -9,7 +9,9 @@
     "search_by_user": "Search",
     "filter_by_user": "By User",
     "filter_by_status": "By Status",
-    "filter_by_date_range": "Enter A Date Range"
+    "filter_by_date_range": "Enter A Date Range",
+    "complete": "Complete",
+    "details": "Details"
   },
 
   "table": {
@@ -19,7 +21,8 @@
     "deadline_date": "Dead Line",
     "user": "User",
     "status": "Status",
-    "paginate_page": "Items Per Page"
+    "paginate_page": "Items Per Page",
+    "id": "Id"
   },
 
   "buttons": {},

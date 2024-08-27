@@ -9,7 +9,9 @@
     "search_by_user": "ابحث",
     "filter_by_user": "بواسطة المستخدم",
     "filter_by_status": "بواسطة الحالة",
-    "filter_by_date_range": "بواسطة مجال من التاريخ"
+    "filter_by_date_range": "بواسطة مجال من التاريخ",
+    "complete": "مكتمل",
+    "details": "تفاصيل"
   },
 
   "table": {

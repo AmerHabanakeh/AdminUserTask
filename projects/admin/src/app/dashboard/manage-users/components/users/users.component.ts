@@ -1,36 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-export interface PeriodicElement {
-  name: string;
-  email: string;
-  tasksAssigned: string;
-}
+import { SpinnerService } from 'projects/shared/spinner.service';
+import { UsersService } from '../../services/users.service';
+import { ToastrService } from 'ngx-toastr';
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { name: 'Hydrogen', email: "1.0079", tasksAssigned:"10-11-2022" },
-  { name: 'Helium', email: "4.0026", tasksAssigned:"10-11-2022" },
-  { name: 'Lithium', email: "6.941", tasksAssigned:"10-11-2022" },
-  { name: 'Beryllium', email: "9.0122", tasksAssigned:"10-11-2022" },
-  { name: 'Boron', email: "10.811", tasksAssigned:"10-11-2022" },
-  { name: 'Carbon', email: "12.010", tasksAssigned:"10-11-2022" },
-  { name: 'Nitrogen', email: "14.006", tasksAssigned:"10-11-2022" },
-  { name: 'Oxygen', email: "15.999", tasksAssigned:"10-11-2022" },
-  { name: 'Fluorine', email: "18.998", tasksAssigned:"10-11-2022" },
-  {  name: 'Neon', email: "20.179", tasksAssigned:"10-11-2022" },
-];
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'email' ,'tasksAssigned', 'actions'];
-  dataSource = ELEMENT_DATA;
-  constructor() { }
-
+  displayedColumns: string[] = ['position', 'name', 'email', 'tasksAssigned', 'actions'];
+  dataSource: any = [];
+  page: any = 1;
+  itemsPerPage: number = 1;
+  itemsPerPageOptions: number[] = [1, 2, 5, 10];
+  totalItems: any;
+  timeOutId: any
+  constructor(public spinnerService: SpinnerService, private userService: UsersService, private toastr: ToastrService) { }
   ngOnInit(): void {
+    this.getUserData();
   }
 
 
+
+  getUserData() {
+    const model = {
+      page: this.page,
+      limit: this.itemsPerPage,
+      name: '',
+    }
+    this.userService.getAllUser(model).subscribe((res: any) => {
+      this.totalItems = res.totalItems;
+      this.dataSource = res.users
+    })
+  }
+
+  deleteUser(id: any) {
+    this.userService.deleteUser(id).subscribe((res) => {
+      this.toastr.success("User Deleted Successfully");
+      this.getUserData();
+    })
+  }
+
+  changePage(event: any) {
+    console.log(event);
+    this.page = event;
+    this.getUserData();
+  }
+
+  onItemsPerPageChange() {
+    this.page = 1;
+    this.getUserData();
+  }
+
+  search(event: any) {
+    // this.model['name'] = event.value;
+    this.page = 1;
+    clearTimeout(this.timeOutId)
+    this.timeOutId = setTimeout(() => {
+      this.getUserData();
+    }, 1000);
+  }
 
 }

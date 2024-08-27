@@ -19,7 +19,12 @@
     "deadline_date": "Dead Line",
     "user": "User",
     "status": "Status",
-    "paginate_page": "Items Per Page"
+    "paginate_page": "Items Per Page",
+    "id": "Id",
+    "name": "Name",
+    "email": "Email",
+    "assigned_task" : "Assigned Task",
+    "actions": "Actions"
 },
 
 "buttons": {},

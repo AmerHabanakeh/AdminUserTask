@@ -1,23 +1,39 @@
-<div class="mt-8">
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-    <div class="bg-white rounded-lg shadow-md overflow-hidden"
-      *ngFor="let item of dataSource | paginate: { id: 'tasks', itemsPerPage: 10, currentPage: page, totalItems: totalItems }; let index = index">
+<div class="mt-10">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" *ngIf="!spinnerService.apiCount">
+    <div class="bg-gray-100 rounded-lg shadow-lg overflow-hidden transform transition-transform hover:scale-105 mb-2"
+      *ngFor="let item of dataSource | paginate: { id: 'tasks', itemsPerPage: itemsPerPage, currentPage: page, totalItems: totalItems }">
       <div class="p-6">
-        <img class="w-full h-40 object-cover" [src]="'https://angular-amer.onrender.com/' + item.image" alt="" />
-        <h2 class="mt-4 text-xl font-semibold text-gray-800">{{ item.title }}</h2>
-        <p class="mt-2 text-sm text-gray-600">Deadline: {{ item.deadline }}</p>
-        <p class="mt-4 text-gray-700">{{ item.description }}</p>
+        <img class="w-full h-48 object-cover rounded-lg mb-4" [src]="'https://angular-amer.onrender.com/' + item.image"
+          alt="{{item.title}}" />
+        <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ item.title }}</h2>
+        <p class="text-sm text-gray-500">Deadline: {{ item.deadline }}</p>
+        <p class="mt-4 text-gray-700 line-clamp-3">{{ item.description }}</p>
         <div class="mt-6 flex justify-between items-center">
-          <a class="text-blue-600 hover:underline" routerLink="/tasks/{{ item._id }}">Details</a>
-          <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" (click)="complete(item)">
-            {{ 'tasks.Complete' | translate }}
-          </button>
-        </div>
+          <a class="text-indigo-600 hover:text-indigo-800 font-medium transition-colors duration-200 px-4 py-2 rounded-lg shadow "
+            routerLink="/tasks/{{ item._id }}">
+            {{"tasks.details" | translate}}
+          </a>
+          <button *ngIf="!spinnerService.apiCount "
+            class="bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 transition-transform duration-200"
+            (click)="complete(item)">
+            Complete</button>
+          </div>
+          <app-spinner class="flex justify-center items-center bg-red-500 rounded-lg px-4 py-2 shadow"></app-spinner>
       </div>
     </div>
   </div>
+  
+  <app-spinner class="flex justify-center items-center bg-gray-300 px-4 py-2"></app-spinner>
 
-  <div class="mt-8 flex justify-center">
-    <pagination-controls (pageChange)="changePage($event)" id="tasks"></pagination-controls>
+  <div class="flex justify-center items-center py-2 px-6 bg-gray-100 border border-gray-200 rounded-lg shadow-md">
+    <div class="flex items-center space-x-3">
+      <label for="itemsPerPageSelect" class="text-gray-700 font-medium">{{"table.paginate_page" |translate}}</label>
+      <select id="itemsPerPageSelect" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()"
+        class="border border-gray-300 rounded-lg px-3 py-2 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+
+    <pagination-controls previousLabel="" nextLabel="" id="tasks" (pageChange)="changePage($event)"
+      class="flex space-x-3 text-gray-700  custom"></pagination-controls>
   </div>
-</div>

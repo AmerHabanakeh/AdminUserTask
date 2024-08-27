@@ -1,7 +1,15 @@
-.imageBox {
-    height: 250px;
-    img {
-    height: 250px;
+.custom ::ng-deep .ngx-pagination {
+    margin-bottom: 0 !important;
+}
+.custom ::ng-deep .ngx-pagination li {
+    -o-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    border-radius: 8px;
+    font-size: 16px;
+}
 
-    }
+.custom ::ng-deep .ngx-pagination li.disabled {
+    cursor: not-allowed;
 }
