@@ -1,0 +1,14 @@
+<div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+    <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6">
+        <header class="flex justify-between items-center border-b pb-4 mb-4">
+            <h2> Are You Want To Discard Changes ? </h2>
+        </header>
+        <footer class="pt-6 flex justify-center space-x-4">
+            <button
+                class="bg-green-600 text-white py-2 px-6 rounded hover:bg-green-700 transition duration-200 disabled:opacity-30 "
+                (click)="confirm()">Yes</button>
+
+            <button class="bg-red-600 text-white py-2 px-6 rounded hover:bg-red-700 transition duration-200" (click)="close()">No</button>
+        </footer>
+    </div>
+</div>

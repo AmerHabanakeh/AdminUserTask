@@ -1,0 +1,30 @@
+{
+  "navbar": {
+    "Tasks": "المهمات",
+    "Users": "المستخدمين"
+  },
+
+  "tasks": {
+    "add_task": "إضافة مهمة",
+    "search_by_user": "ابحث",
+    "filter_by_user": "بواسطة المستخدم",
+    "filter_by_status": "بواسطة الحالة",
+    "filter_by_date_range": "بواسطة مجال من التاريخ"
+  },
+
+  "table": {
+    "image": "الصورة",
+    "title": "العنوان",
+    "description": "الوصف",
+    "deadline_date": "تاريخ النهاية",
+    "user": "المستخدم",
+    "status": "الحالة",
+    "paginate_page": "عدد المهام في الصفحة"
+  },
+
+  "buttons": {},
+
+  "general": {},
+
+  "users": {}
+}

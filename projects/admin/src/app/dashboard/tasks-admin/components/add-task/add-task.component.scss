@@ -1,0 +1,25 @@
+h1 {
+    font-weight: bold;
+}
+
+textarea {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 130px;
+    max-height: 130px;
+}
+
+// input.ng-invalid.ng-touched{
+//     border: 1px solid red !important;
+// }
+
+
+.required-field {
+border: 1px solid red;
+}
+
+.required-label::after {
+content: "*";
+color: red;
+margin-left: 4px;
+}

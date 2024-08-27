@@ -1,0 +1,16 @@
+
+.required-field {
+border: 1px solid red;
+}
+
+.required-label::after {
+content: "*";
+color: red;
+margin-left: 4px;
+}
+
+:host ::ng-deep {
+    mat-hint {
+        color: #f44336 !important;
+    }
+}

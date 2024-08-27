@@ -1,0 +1,83 @@
+<div class="flex min-h-full flex-col justify-center items-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Sign Up
+        </h2>
+    </div>
+
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form class="space-y-6" [formGroup]="registerForm">
+            <div>
+                <label for="email" class="block text-sm font-medium leading-6 text-gray-900 required-label">Email
+                    address</label>
+                <div class="mt-2">
+                    <input id="email" name="email" type="email" autocomplete="email" required formControlName="email"
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                        [ngClass]="{ 'required-field': email?.invalid && email?.touched }" />
+                </div>
+            </div>
+
+            <div>
+                <label for="username" class="block text-sm font-medium leading-6 text-gray-900 required-label">User
+                    Name</label>
+                <div class="mt-2">
+                    <input id="username" name="username" type="text" autocomplete="username" required
+                        formControlName="username"
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                        [ngClass]="{
+                            'required-field': username?.invalid && username?.touched
+            }" />
+                </div>
+            </div>
+
+            <div>
+                <div class="mt-2">
+                    <label for="password"
+                        class="block text-sm font-medium leading-6 text-gray-900 required-label">Password</label>
+                    <input id="password" name="password" type="password" autocomplete="password" required
+                        formControlName="password"
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                        [ngClass]="{
+                            'required-field': password?.invalid && password?.touched
+            }" />
+                </div>
+            </div>
+
+            <div>
+                <div class="mt-2">
+                    <label for="confirmPassword"
+                        class="block text-sm font-medium leading-6 text-gray-900 required-label">Confirm
+                        Password</label>
+                    <input id="confirm_pass" name="confirmPassword" type="password" autocomplete="confirmPassword"
+                        required formControlName="confirmPassword"
+                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                        [ngClass]="{
+                            'required-field':
+                confirmPassword?.invalid && confirmPassword?.touched
+            }" />
+                    <mat-hint class="text-xs" *ngIf="registerForm.hasError('notSame') && confirmPassword?.touched">*Not Matched*</mat-hint>
+                </div>
+            </div>
+
+            <div *ngIf="!!spinnerService.apiCount; else LoginWord">
+                <button type="button" (click)="createAccount()" [disabled]="!registerForm.valid"
+                    class="flex disabled:opacity-45 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    <app-spinner class="d-flex justify-content-center align-items-center"></app-spinner>
+                </button>
+            </div>
+
+            <ng-template #LoginWord>
+                <button type="button" (click)="createAccount()" [disabled]="!registerForm.valid"
+                    class="flex disabled:opacity-45 w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Register
+                </button>
+            </ng-template>
+        </form>
+
+        <div class="mt-10 text-center text-sm text-gray-500">
+            Have an Account?
+            <a routerLink="/auth/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Login
+            </a>
+        </div>
+    </div>
+</div>

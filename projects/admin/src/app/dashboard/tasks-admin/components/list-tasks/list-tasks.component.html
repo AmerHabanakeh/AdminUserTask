@@ -1,0 +1,99 @@
+<div class="mt-4">
+  <div class="flex justify-end">
+    <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded" (click)="addTask()">
+      {{"tasks.add_task" | translate}}
+    </button>
+  </div>
+
+  <form>
+    <div class="flex flex-wrap mt-3">
+      <div class="w-full md:w-1/4 px-2 mb-4 md:mb-0">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="search">{{"tasks.search_by_user" |
+          translate}}</label>
+        <input id="search" type="text" placeholder="title search" (keyup)="search($event.target)"
+          class="w-full border border-gray-300 rounded py-2 px-3 leading-tight focus:outline-none focus:ring focus:border-blue-300" />
+      </div>
+      <div class="w-full md:w-1/4 px-2 mb-4 md:mb-0">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="user">{{"tasks.filter_by_user" |
+          translate}}</label>
+        <select id="user" (change)="selectUser($event)"
+          class="w-full border border-gray-300 rounded py-2 px-3 leading-tight focus:outline-none focus:ring focus:border-blue-300">
+          <option selected disabled>By User</option>
+          <option *ngFor="let user of users" [value]="user?.id">{{user?.name}}</option>
+        </select>
+      </div>
+      <div class="w-full md:w-1/4 px-2 mb-4 md:mb-0">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="status">{{"tasks.filter_by_status" |
+          translate}}</label>
+        <select id="status" (change)="selectStatus($event)"
+          class="w-full border border-gray-300 rounded py-2 px-3 leading-tight focus:outline-none focus:ring focus:border-blue-300">
+          <option selected disabled>By Status</option>
+          <option *ngFor="let state of status" [value]="state?.name">{{state?.name}}</option>
+        </select>
+      </div>
+
+      <mat-form-field>
+        <mat-label>{{"tasks.filter_by_date_range" | translate}}</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Start date" (dateChange)="selectDate($event , 'fromDate')">
+          <input matEndDate placeholder="End date" (dateChange)="selectDate($event , 'toDate')">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div class="listBox mt-4">
+    <table class="w-full shadow-lg mt-2">
+      <thead>
+        <tr class="text-left text-gray-300 " style="background-color: #1f2937">
+          <th class="py-2 px-4 border-r-2 border-l-2 text-center">{{"table.image" | translate}}.</th>
+          <th class="py-2 px-4 border-r-2 text-center">{{"table.title" | translate}}</th>
+          <th class="py-2 px-4 border-r-2 text-center">{{"table.user" | translate}}</th>
+          <th class="py-2 px-4 border-r-2 text-center">{{"table.deadline_date" | translate}}</th>
+          <th class="py-2 px-4 border-r-2 text-center">{{"table.status" | translate}}</th>
+          <th class="py-2 px-4 border-r-2 text-center">{{"table.actions" | translate}}</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="!spinnerService.apiCount">
+        <tr class="hover:bg-gray-50"
+          *ngFor="let task of dataSource| paginate: { id: 'tasks',itemsPerPage: itemsPerPage,currentPage: page,totalItems: total }; let i = index ">
+          <td class="py-1 px-4 border-b border-r-2 text-center">
+            <!-- <img [src]="'https://angular-amer.onrender.com/' + task.image" alt="" class="w-16 h-16 p-1" /> -->
+            {{i + 1}}
+          </td>
+          <td class="py-2 px-4 border-b border-r-2 text-center">{{ task.title }}</td>
+          <td class="py-2 px-4 border-b border-r-2 text-center">{{ task.user }}</td>
+          <td class="py-2 px-4 border-b border-r-2 text-center">{{ task.deadline }}</td>
+          <td class="py-2 px-4 border-b border-r-2 text-center">{{ task.status }}</td>
+          <td class="py-2 px-4 border-b flex items-center space-x-2 justify-center text-center">
+            <button class="bg-yellow-500 text-white font-bold py-1 px-3 rounded" (click)="updateTask(task)">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="bg-red-500 text-white font-bold py-1 px-3 rounded" (click)="deleteTask(task._id)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-spinner class="flex justify-center items-center p-2.5 bg-gray-200"></app-spinner>
+
+
+
+<div class="flex justify-center items-center py-2 px-6 bg-gray-100 border border-gray-200 rounded-lg shadow-md">
+  <div class="flex items-center space-x-3">
+    <label for="itemsPerPageSelect" class="text-gray-700 font-medium">{{"table.paginate_page" |translate}}</label>
+    <select id="itemsPerPageSelect" [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()"
+      class="border border-gray-300 rounded-lg px-3 py-2 bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+    </select>
+  </div>
+
+  <pagination-controls previousLabel="" nextLabel="" id="tasks" (pageChange)="changePage($event)"
+    class="flex space-x-3 text-gray-700  custom"></pagination-controls>
+</div>
