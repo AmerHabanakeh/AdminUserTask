@@ -35,7 +35,7 @@ export class ListTasksComponent implements OnInit {
   itemsPerPageOptions: number[] = [2, 5, 10, 20];
   filteration: any = {
     page: this.page,
-    limit: 10,
+    limit: this.itemsPerPage,
   };
   timeOutId: any;
   total: any;

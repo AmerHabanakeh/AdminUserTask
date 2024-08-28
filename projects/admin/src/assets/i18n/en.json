@@ -41,7 +41,7 @@
   "buttons": {
     "create": "Create",
     "update": "Update",
-    "close": "Delete"
+    "close": "Close"
   },
 
   "general": {},
