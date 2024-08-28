@@ -15,6 +15,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SharedModule2 } from './shared/shared.module';
 import { SharedModule } from 'projects/shared/module/Shared.module';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -32,13 +33,13 @@ import { SharedModule } from 'projects/shared/module/Shared.module';
     AppRoutingModule,
     NgxPaginationModule,
     TranslateModule.forRoot({
-      defaultLanguage:'en',
+      defaultLanguage: 'en',
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
-  }),
+    }),
     BrowserAnimationsModule
   ],
   providers: [],

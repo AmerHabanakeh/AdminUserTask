@@ -4,7 +4,7 @@
       <div class="w-full md:w-1/4 px-2 mb-4 md:mb-0">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="search">{{"tasks.search_by_user" |
           translate}}</label>
-        <input id="search" type="text" placeholder="title search" (keyup)="search($event.target)"
+        <input id="search" type="text" placeholder="title search" (keyup)="search($event)"
           class="w-full border border-gray-300 rounded py-2 px-3 leading-tight focus:outline-none focus:ring focus:border-blue-300" />
       </div>
     </div>
@@ -23,20 +23,30 @@
       </thead>
       <tbody *ngIf="!spinnerService.apiCount">
         <tr class="hover:bg-gray-50"
-          *ngFor="let user of dataSource| paginate: { id: 'users',itemsPerPage: itemsPerPage,currentPage: page,totalItems: totalItems }; let i = index ">
+          *ngFor="let user of dataSource| paginate: { id: 'users',itemsPerPage: itemsPerPage,currentPage: page,totalItems: totalItems }; let index = index ">
           <td class="py-1 px-4 border-b border-r-2 text-center">
             <!-- <img [src]="'https://angular-amer.onrender.com/' + task.image" alt="" class="w-16 h-16 p-1" /> -->
-            {{i + 1}}
+            {{index + 1}}
           </td>
           <td class="py-2 px-4 border-b border-r-2 text-center">{{ user.username }}</td>
           <td class="py-2 px-4 border-b border-r-2 text-center">{{ user.email }}</td>
           <td class="py-2 px-4 border-b border-r-2 text-center">{{ user.assignedTasks }}</td>
-          <td class="py-2 px-4 border-b flex items-center space-x-2 justify-center text-center">
+          <td class="py-2 px-4 border-b flex items-center space-x-2 justify-center text-center relative">
             <button *ngIf="!spinnerService.apiCount" class="bg-red-500 text-white font-bold py-1 px-3 rounded"
-              (click)="deleteUser(user._id)">
+              (click)="deleteUser(user._id , index)">
               <i class="fas fa-trash-alt"></i>
             </button>
+            <span class="circle active" (click)="changeUserStatus(user.status , user._id , index)"
+              *ngIf="user.status == 'Active'">
+              <span class="status-text" *ngIf="user.status == 'Active'"> Offline</span>
+            </span>
+            <span class="circle in-active" (click)="changeUserStatus(user.status , user._id , index)"
+              *ngIf="user.status !== 'Active'">
+              <span class="status-text" *ngIf="user.status !== 'Active'">Online</span>
+            </span>
           </td>
+
+
           <app-spinner class="bg-red-500 py-2 px-4 rounded-lg"></app-spinner>
         </tr>
       </tbody>

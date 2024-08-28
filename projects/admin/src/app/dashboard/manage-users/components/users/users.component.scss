@@ -13,3 +13,111 @@
 .custom ::ng-deep .ngx-pagination li.disabled {
     cursor: not-allowed;
 }
+// .circle {
+//     width: 35px;
+//     height: 35px;
+//     background-color: green;
+//     -o-border-radius: 50%;
+//     -webkit-border-radius: 50%;
+//     -moz-border-radius: 50%;
+//     -ms-border-radius: 50%;
+//     border-radius: 50%;
+//     cursor: pointer;
+//     border: 2px solid #f3f3f3 ;
+//     -o-transition: 0.2s;
+//     -webkit-transition: 0.2s;
+//     -moz-transition: 0.2s;
+//     -ms-transition: 0.2s;
+//     transition: 0.2s;
+//     position: relative;
+// }
+
+// .circle.active:hover,
+// .circle.circle.in-active:hover {
+//     width: 35px;
+//     height: 35px;
+//     -o-border-radius: 8px;
+//     -webkit-border-radius: 8px;
+//     -moz-border-radius: 8px;
+//     -ms-border-radius: 8px;
+//     border-radius: 8px;
+//     padding: 2px 20px;
+// }
+
+// .circle.circle.active:hover::after {
+//     content: "offline";
+//     font-size: 12px;
+//     color: #fff;
+//     position: absolute;
+//     left: 50%;
+//     top: 50%;
+//     -o-transform: translate(-50%, -50%);
+//     -webkit-transform: translate(-50%, -50%);
+//     -moz-transform: translate(-50%, -50%);
+//     -ms-transform: translate(-50%, -50%);
+//     transform: translate(-50%, -50%);
+// }
+
+// .circle.circle.in-active:hover::after {
+//     content: "online";
+//     font-size: 12px;
+//     color: #fff;
+//     position: absolute;
+//     left: 50%;
+//     top: 50%;
+//     -o-transform: translate(-50%, -50%);
+//     -webkit-transform: translate(-50%, -50%);
+//     -moz-transform: translate(-50%, -50%);
+//     -ms-transform: translate(-50%, -50%);
+//     transform: translate(-50%, -50%);
+// }
+
+// .circle.in-active {
+//     width: 35px;
+//     height: 35px;
+//     background-color: #ef4444;
+//     -o-border-radius: 50%;
+//     -webkit-border-radius: 50%;
+//     -moz-border-radius: 50%;
+//     -ms-border-radius: 50%;
+//     border-radius: 50%;
+//     cursor: pointer;
+//     border: 2px solid #f3f3f3 ;
+// }
+.circle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #f3f3f3;
+    position: relative;
+    display: inline-block;
+}
+
+.circle.active {
+    background-color: green;
+}
+
+.circle.in-active {
+    background-color: #ef4444;
+}
+
+.status-text {
+    font-size: 13px;
+    font-weight: bold;
+    color: #1f2937;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: calc(90% + 10px); 
+    transform: translateY(-50%);
+    white-space: nowrap;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+.circle:hover .status-text {
+    opacity: 1;
+    visibility: visible;
+}
+

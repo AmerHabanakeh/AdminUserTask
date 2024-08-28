@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .dark .bg-white {
+    @apply bg-gray-900;
+  }
+  .dark .text-gray-900 {
+    @apply text-white;
+  }
+}
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

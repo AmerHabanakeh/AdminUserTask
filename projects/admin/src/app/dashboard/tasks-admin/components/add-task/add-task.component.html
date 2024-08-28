@@ -1,8 +1,12 @@
 <div *ngIf="!spinnerService.apiCount" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
     <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6">
         <header class="flex justify-between items-center border-b pb-4 mb-4">
-            <h1 *ngIf="!data" class="text-xl font-semibold">Add New Task</h1>
-            <h1 *ngIf="data" class="text-xl font-semibold">Update Task</h1>
+            <h1 *ngIf="!data" class="text-xl font-semibold">
+                {{ "tasks.add_task" | translate }}
+            </h1>
+            <h1 *ngIf="data" class="text-xl font-semibold">
+                {{ "tasks.update_task" | translate }}
+            </h1>
             <button matDialogClose class="text-gray-500 hover:text-red-600 transition duration-200" (click)="close()">
                 <mat-icon><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -14,19 +18,21 @@
         <form [formGroup]="newTaskForm">
             <div class="grid grid-cols-1 gap-4">
                 <div>
-                    <label for="title" class="block text-sm font-medium text-gray-700 required-label">Title</label>
+                    <label for="title" class="block text-sm font-medium text-gray-700 required-label">{{ "table.title" |
+                        translate }}</label>
                     <input id="title" type="text" placeholder="Title" formControlName="title"
                         [ngClass]="{ 'required-field': title?.invalid && title?.touched }"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                    <mat-error *ngIf="title?.hasError('minlength')">* 5 Character at Least *
+                    <mat-error *ngIf="title?.hasError('minlength')">{{ "errors.minlength" | translate }}
                     </mat-error>
                 </div>
                 <div>
-                    <label for="user" class="block text-sm font-medium text-gray-700 required-label">User</label>
+                    <label for="user" class="block text-sm font-medium text-gray-700 required-label">{{ "table.user" |
+                        translate }}</label>
                     <select id="user" formControlName="userId"
                         [ngClass]="{ 'required-field': title?.invalid && title?.touched }"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        <option value="">Select a user</option>
+                        <option value="">{{ "tasks.select_user" | translate }}</option>
                         <option *ngFor="let user of users" [value]="user?.id">
                             {{ user?.name }}
                         </option>
@@ -34,23 +40,25 @@
                 </div>
                 <div class="py-3">
                     <label for="selectFile"
-                        class="required-label bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Select
-                        Image</label>
+                        class="required-label bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">{{
+                        "tasks.select_image" | translate }}
+                    </label>
                     <div class="mt-2">{{ fileName }}</div>
                     <input type="file" id="selectFile"
                         [ngClass]="{ 'required-field': image?.invalid && title?.touched }"
                         (change)="selectImage($event)" hidden />
                 </div>
                 <div>
-                    <label for="deadline" class="block text-sm font-medium text-gray-700 required-label">Deadline
-                        Date</label>
+                    <label for="deadline" class="block text-sm font-medium text-gray-700 required-label">{{
+                        "table.deadline_date" | translate }}
+                    </label>
                     <input id="deadline" type="date" formControlName="deadline" [ngClass]="{
               'required-field': deadline?.invalid && deadline?.touched
             }" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
                 </div>
                 <div>
-                    <label for="description"
-                        class="block text-sm font-medium text-gray-700 required-label">Description</label>
+                    <label for="description" class="block text-sm font-medium text-gray-700 required-label">{{
+                        "table.description" | translate }}</label>
                     <textarea id="description" placeholder="Task description..." rows="4" formControlName="description"
                         [ngClass]="{
               'required-field': description?.invalid && description?.touched
@@ -63,18 +71,18 @@
             <button *ngIf="!data"
                 class="bg-green-600 text-white py-2 px-6 rounded hover:bg-green-700 transition duration-200 disabled:opacity-30"
                 (click)="createTask()" [disabled]="!newTaskForm.valid">
-                Create
+                {{ "buttons.create" | translate }}
             </button>
 
             <button *ngIf="data"
                 class="bg-green-600 text-white py-2 px-6 rounded hover:bg-green-700 transition duration-200 disabled:opacity-30"
                 (click)="updateTask()" [disabled]="!newTaskForm.valid">
-                Update
+                {{ "buttons.update" | translate }}
             </button>
 
             <button class="bg-red-600 text-white py-2 px-6 rounded hover:bg-red-700 transition duration-200"
                 (click)="close()">
-                Close
+                {{ "buttons.close" | translate }}
             </button>
         </footer>
     </div>

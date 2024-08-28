@@ -27,6 +27,18 @@
         "autocomplete-valid": "off"
       }
     ],
-    "no-inline-styles": "off"
+    "no-inline-styles": "off",
+    "axe/parsing": [
+      "default",
+      {
+        "duplicate-id-active": "off"
+      }
+    ],
+    "axe/aria": [
+      "default",
+      {
+        "aria-required-children": "off"
+      }
+    ]
   }
 }

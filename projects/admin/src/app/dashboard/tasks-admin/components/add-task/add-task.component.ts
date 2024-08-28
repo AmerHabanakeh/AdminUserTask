@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
 import { SpinnerService } from 'projects/shared/spinner.service';
+import { UsersService } from '../../../manage-users/services/users.service';
 
 @Component({
   selector: 'app-add-task',
@@ -21,19 +22,37 @@ export class AddTaskComponent implements OnInit {
     private taksService: TasksService,
     private toastr: ToastrService,
     public spinnerService: SpinnerService,
-  ) { }
+    private userService: UsersService,
+  ) {
+    this.getUserFromSubject();
+  }
 
 
-  users: any = [
-    { name: 'Moahmed', id: '66c5da3511352840abf4da1c' },
-    { name: 'Ali', id: '66c9fb8e9c70a902b7003a5b' },
-    { name: 'Test', id: '66cdac640be2304696239a09' },
-  ];
+  users: any = [];
   newTaskForm!: FormGroup;
   fileName = '';
   formValue: any;
+
+
   ngOnInit(): void {
     this.createForm();
+  }
+
+
+  getUserFromSubject() {
+    this.userService.userData.subscribe((res: any) => {
+      this.users = this.UsersMapping(res.data);
+    })
+  }
+
+  UsersMapping(data: any[]) {
+    let newArray = data?.map((item: any) => {
+      return {
+        name: item.username,
+        id: item._id,
+      }
+    })
+    return newArray;
   }
 
   createForm() {
@@ -89,13 +108,13 @@ export class AddTaskComponent implements OnInit {
         hasChange = true;
       }
     })
-    if(hasChange) {
-      const dialogRef = this.matDialog.open(ConfirmationComponent , {
+    if (hasChange) {
+      const dialogRef = this.matDialog.open(ConfirmationComponent, {
         width: "750px",
-      }) ;
-      
+      });
+
       dialogRef.afterClosed().subscribe((res) => {
-        if(res) {
+        if (res) {
         }
       })
     } else {

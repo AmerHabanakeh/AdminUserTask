@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
+import { adminGuard } from '../core/guards/admin.guard';
 
 const routes: Routes = [
 
   {
     path: '',
     component: LayoutComponent,
+    canActivateChild: [adminGuard],
     children: [
       {
         path: 'tasks',
@@ -16,6 +18,7 @@ const routes: Routes = [
         path: 'users',
         loadChildren: () => import(`./manage-users/manage-users.module`).then(m => m.ManageUsersModule)
       },
+
     ]
   },
 

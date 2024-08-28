@@ -1,18 +1,25 @@
 {
-"navbar": {
+  "navbar": {
     "Tasks": "Tasks",
-    "Users": "Users"
-},
+    "Users": "Users",
+    "dashboard": "Dashboard",
+    "light": "Light",
+    "dark": "Dark",
+    "logout": "Logout"
+  },
 
-"tasks": {
+  "tasks": {
     "add_task": "Add Task",
+    "update_task": "Update Task",
     "search_by_user": "Search",
     "filter_by_user": "By User",
     "filter_by_status": "By Status",
-    "filter_by_date_range": "Enter A Date Range"
-},
+    "filter_by_date_range": "Enter A Date Range",
+    "select_user": "Select User",
+    "select_image": "Select Image"
+  },
 
-"table": {
+  "table": {
     "image": "Image",
     "title": "Title",
     "description": "Description",
@@ -23,13 +30,21 @@
     "id": "Id",
     "name": "Name",
     "email": "Email",
-    "assigned_task" : "Assigned Task",
+    "assigned_task": "Assigned Task",
     "actions": "Actions"
-},
+  },
 
-"buttons": {},
+  "errors": {
+    "minlength": "* At least 5 Character * "
+  },
 
-"general": {},
+  "buttons": {
+    "create": "Create",
+    "update": "Update",
+    "close": "Delete"
+  },
 
-"users": {}
+  "general": {},
+
+  "users": {}
 }

@@ -1,15 +1,22 @@
 {
   "navbar": {
     "Tasks": "المهمات",
-    "Users": "المستخدمين"
+    "Users": "المستخدمين",
+    "dashboard": "لوحة التحكم",
+    "Light": "فاتح",
+    "dark": "غامق",
+    "logout": "تسجيل الخروج"
   },
 
   "tasks": {
     "add_task": "إضافة مهمة",
+    "update_task": "تعديل مهمة",
     "search_by_user": "ابحث",
     "filter_by_user": "بواسطة المستخدم",
     "filter_by_status": "بواسطة الحالة",
-    "filter_by_date_range": "بواسطة مجال من التاريخ"
+    "filter_by_date_range": "بواسطة مجال من التاريخ",
+    "select_user": "اختر مستخدم",
+    "select_image": "اختر صورة"
   },
 
   "table": {
@@ -27,7 +34,15 @@
     "actions": "العمليات"
   },
 
-  "buttons": {},
+  "errors": {
+    "minlength": "* خمسة محارف على الأقل * "
+  },
+
+  "buttons": {
+    "create": "إنشاء",
+    "update": "تعديل",
+    "close": "حذف"
+  },
 
   "general": {},
 

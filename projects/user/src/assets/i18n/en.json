@@ -1,7 +1,11 @@
 {
   "navbar": {
     "Tasks": "Tasks",
-    "Users": "Users"
+    "Users": "Users",
+    "dashboard": "Dashboard",
+    "profile": "Your Profile",
+    "settings": "Settings",
+    "logout": "Logout"
   },
 
   "tasks": {
