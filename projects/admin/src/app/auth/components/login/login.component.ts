@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.toastr.success('Login Successfully');
         this.router.navigate(['/tasks']);
       },
-      
+
     );
   }
 

@@ -111,10 +111,14 @@ export class AddTaskComponent implements OnInit {
     if (hasChange) {
       const dialogRef = this.matDialog.open(ConfirmationComponent, {
         width: "750px",
+        data: {
+          title: 'Are You Want To Discard Changes ?'
+        }
       });
 
       dialogRef.afterClosed().subscribe((res) => {
         if (res) {
+          this.dialog.close();
         }
       })
     } else {

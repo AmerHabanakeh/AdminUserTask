@@ -18,7 +18,7 @@ export class UsersService {
   getAllUser(filter: any) {
     let params = new HttpParams;
     if (filter) {
-      Object.entries(filter).forEach(([key, value]: any) => {
+      Object.entries(filter).forEach(([key, value]: any) => { // page , limit , name
         if (value) {
           params = params.append(key, value);
         }

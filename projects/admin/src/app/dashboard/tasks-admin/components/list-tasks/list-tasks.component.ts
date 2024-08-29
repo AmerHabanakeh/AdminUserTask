@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { TasksService } from '../../services/tasks.service';
 import { ToastrService } from 'ngx-toastr';
 import * as moment from 'moment';
 import { SpinnerService } from 'projects/shared/spinner.service';
 import { UsersService } from '../../../manage-users/services/users.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
+
 export interface PeriodicElement {
   title: string;
   user: string;
@@ -38,7 +40,7 @@ export class ListTasksComponent implements OnInit {
     limit: this.itemsPerPage,
   };
   timeOutId: any;
-  total: any;
+  totalItems: any;
 
   users: any = [];
 
@@ -49,6 +51,7 @@ export class ListTasksComponent implements OnInit {
     private toastr: ToastrService,
     public spinnerService: SpinnerService,
     private userService: UsersService,
+    public matDialog: MatDialog,
   ) {
     this.getUsers();
     this.getUserFromSubject();
@@ -82,7 +85,7 @@ export class ListTasksComponent implements OnInit {
     this.filteration.limit = this.itemsPerPage;
     this.taksService.getAllTasks(this.filteration).subscribe((res: any) => {
       this.dataSource = this.mappingTasks(res.tasks);
-      this.total = res.totalItems;
+      this.totalItems = res.totalItems;
     });
   }
 
@@ -90,10 +93,11 @@ export class ListTasksComponent implements OnInit {
     let newTasks = data.map((item) => {
       return {
         ...item,
-        user: item.userId.username,
+        user: item?.userId?.username,
       };
     });
     return newTasks;
+
   }
 
   addTask() {
@@ -109,11 +113,23 @@ export class ListTasksComponent implements OnInit {
   }
 
   deleteTask(id: any) {
-    this.taksService.deleteTask(id).subscribe((res) => {
-      this.toastr.success('Task Delete Successfully');
-      this.getAllTasks();
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      width: "750px",
+      data: {
+        title: 'Are You Sure To Delete Task ?'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.taksService.deleteTask(id).subscribe((res) => {
+          this.toastr.success("Task Delete Successfully");
+          this.getAllTasks();
+        })
+      }
     });
   }
+
 
   updateTask(element: any) {
     const dialogRef = this.dialog.open(AddTaskComponent, {

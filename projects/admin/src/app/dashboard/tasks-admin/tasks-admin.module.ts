@@ -10,7 +10,7 @@ import { SharedModule } from "../../../../../shared/module/Shared.module";
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -28,6 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TasksAdminRoutingModule,
     SharedModule,
     TranslateModule,
-]
+    MatDialogModule,
+  ],
 })
 export class TasksAdminModule { }

@@ -63,7 +63,7 @@
       </thead>
       <tbody *ngIf="!spinnerService.apiCount">
         <tr class="hover:bg-gray-100 dark:hover:bg-gray-700"
-          *ngFor="let task of dataSource| paginate: { id: 'tasksUser', itemsPerPage: itemsPerPage, currentPage: page, totalItems: total }; let i = index">
+          *ngFor="let task of dataSource| paginate: { id: 'tasksForUser', itemsPerPage: itemsPerPage, currentPage: page, totalItems: totalItems }; let i = index">
           <td class="py-1 px-4 border-b border-r-2 border-l-2 text-center">
             {{i + 1}}
           </td>
@@ -100,6 +100,6 @@
     </select>
   </div>
 
-  <pagination-controls previousLabel="" nextLabel="" id="tasksUser" (pageChange)="changePage($event)"
+  <pagination-controls previousLabel="" nextLabel="" id="tasksForUser" (pageChange)="changePage($event)"
     class="flex space-x-3 text-gray-700 dark:text-gray-300 custom"></pagination-controls>
 </div>

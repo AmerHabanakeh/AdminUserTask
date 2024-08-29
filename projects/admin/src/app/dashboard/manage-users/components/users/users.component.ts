@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'email', 'tasksAssigned', 'actions'];
   dataSource: any = [];
   page: any = 1;
   itemsPerPage: number = 1;
@@ -19,6 +18,7 @@ export class UsersComponent implements OnInit {
   constructor(public spinnerService: SpinnerService, private userService: UsersService, private toastr: ToastrService) {
     this.getUserFromSubject();
   }
+
   ngOnInit(): void {
     this.getUser();
   }
@@ -55,7 +55,6 @@ export class UsersComponent implements OnInit {
   }
 
   changePage(event: any) {
-    console.log(event);
     this.page = event;
     this.getUser();
   }
